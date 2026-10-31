@@ -1,0 +1,277 @@
+:root {
+  --cor-texto: #231b18;
+  --cor-texto-suave: #675b54;
+  --cor-destaque: #6f2341;
+  --cor-erro: #a82a1f;
+  --raio: 0.625rem;
+  /* Fundo claro derivado da cor do texto de cada elemento. */
+  --fundo-claro: color-mix(in srgb, currentcolor 12%, transparent);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  background: #f8f4ee;
+  color: var(--cor-texto);
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+:focus-visible {
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: 2px;
+}
+
+/* Cabeçalho */
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem max(1rem, 50% - 33rem);
+  background: var(--cor-destaque);
+  color: #fff;
+}
+
+h1 {
+  font: 700 1.75rem/1.2 'Palatino Linotype', Palatino, Georgia, serif;
+}
+
+header a {
+  padding: 0.5rem 0.875rem;
+  color: inherit;
+  border: 1px solid;
+  border-radius: var(--raio);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+header a:focus-visible {
+  outline-color: #fff;
+}
+
+/* Estrutura */
+
+main {
+  display: grid;
+  gap: 2rem;
+  max-width: 68rem;
+  margin-inline: auto;
+  padding: 1.5rem 1rem 2rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+}
+
+.secao-topo {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+#contador {
+  color: var(--cor-texto-suave);
+}
+
+.painel,
+.produto {
+  background: #fff;
+  border: 1px solid #e2d9ce;
+  border-radius: var(--raio);
+}
+
+.painel {
+  padding: 1.5rem 1rem;
+}
+
+.painel h2 {
+  margin-bottom: 1rem;
+}
+
+/* Formulário */
+
+.campo {
+  display: grid;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.campos-lado-a-lado {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 1rem;
+}
+
+label {
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid #a99c91;
+  border-radius: var(--raio);
+  font: inherit;
+}
+
+[aria-invalid='true'] {
+  border-color: var(--cor-erro);
+  box-shadow: inset 0 0 0 1px var(--cor-erro);
+}
+
+.campo p {
+  color: var(--cor-erro);
+  font-size: 0.875rem;
+}
+
+.campo p:empty {
+  display: none;
+}
+
+.acoes-formulario {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: 0.5rem;
+}
+
+/* Botões */
+
+button {
+  min-height: 2.75rem;
+  padding: 0.25rem 0.5rem;
+  background: none;
+  color: var(--cor-destaque);
+  border: 0;
+  border-radius: var(--raio);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--fundo-claro);
+}
+
+form button {
+  border: 1px solid;
+}
+
+[type='submit'],
+[type='submit']:hover {
+  background: var(--cor-destaque);
+  color: #fff;
+  border-color: var(--cor-destaque);
+}
+
+[data-acao='excluir'] {
+  color: var(--cor-erro);
+}
+
+/* Lista de produtos */
+
+ul {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.produto {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.75rem 1rem;
+}
+
+/* A sobra de 9rem é o espaço do preço; a etiqueta sempre desce para a linha seguinte. */
+.produto-nome {
+  flex: 1 1 calc(100% - 9rem);
+  overflow-wrap: anywhere;
+}
+
+.produto-preco {
+  font-size: 1.125rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.produto-estoque {
+  padding: 0.125rem 0.625rem;
+  background: var(--fundo-claro);
+  color: #1c5f41;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.produto-indisponivel {
+  background: #f3eee7;
+}
+
+.produto-indisponivel .produto-estoque {
+  color: var(--cor-erro);
+}
+
+.produto-em-edicao {
+  outline: 2px solid var(--cor-destaque);
+}
+
+#lista-vazia {
+  padding: 2rem 1rem;
+  color: var(--cor-texto-suave);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+/* Aviso flutuante: vazio continua na página para o leitor de tela anunciar o texto;
+   fica no topo, longe do teclado do celular, e não recebe cliques. */
+
+#mensagem {
+  position: fixed;
+  inset: 1rem 1rem auto;
+  max-width: 28rem;
+  margin-inline: auto;
+  padding: 0.75rem 1rem;
+  background: var(--cor-texto);
+  color: #fff;
+  border-radius: var(--raio);
+  text-align: center;
+  overflow-wrap: anywhere;
+  pointer-events: none;
+}
+
+#mensagem[data-tipo='erro'] {
+  background: var(--cor-erro);
+}
+
+#mensagem:empty {
+  opacity: 0;
+}
+
+/* Telas maiores: lista e formulário lado a lado */
+
+@media (min-width: 56rem) {
+  header a {
+    display: none;
+  }
+
+  main {
+    grid-template-columns: minmax(0, 1fr) 21rem;
+    align-items: start;
+  }
+
+  .painel {
+    position: sticky;
+    top: 1rem;
+  }
+}

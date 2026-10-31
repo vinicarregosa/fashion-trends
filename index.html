@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Organize produtos, preços e quantidades disponíveis em um só lugar."
+    />
+    <meta name="theme-color" content="#6f2341" />
+    <title>FashionTrends</title>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>FashionTrends</h1>
+        <p>Produtos, preços e quantidades em um só lugar.</p>
+      </div>
+      <a href="#titulo-cadastro">Novo produto</a>
+    </header>
+
+    <main>
+      <section aria-labelledby="titulo-produtos">
+        <div class="secao-topo">
+          <h2 id="titulo-produtos">Produtos</h2>
+          <p id="contador" aria-live="polite"></p>
+        </div>
+
+        <div class="campo" role="search">
+          <label for="busca">Pesquisar por nome</label>
+          <input id="busca" name="busca" type="search" autocomplete="off" />
+        </div>
+
+        <ul id="lista-produtos"></ul>
+        <p id="lista-vazia" hidden>
+          Nenhum produto cadastrado ainda.
+        </p>
+      </section>
+
+      <section class="painel" aria-labelledby="titulo-cadastro">
+        <h2 id="titulo-cadastro">Cadastrar produto</h2>
+
+        <form id="form-produto" novalidate>
+          <div class="campo">
+            <label for="nome">Nome</label>
+            <input
+              id="nome"
+              name="nome"
+              type="text"
+              autocomplete="off"
+              aria-describedby="erro-nome"
+            />
+            <p id="erro-nome"></p>
+          </div>
+
+          <div class="campos-lado-a-lado">
+            <div class="campo">
+              <label for="preco">Preço (R$)</label>
+              <input
+                id="preco"
+                name="preco"
+                type="text"
+                inputmode="decimal"
+                maxlength="12"
+                autocomplete="off"
+                placeholder="59,90"
+                aria-describedby="erro-preco"
+              />
+              <p id="erro-preco"></p>
+            </div>
+
+            <div class="campo">
+              <label for="quantidade">Quantidade</label>
+              <input
+                id="quantidade"
+                name="quantidade"
+                type="text"
+                inputmode="numeric"
+                maxlength="9"
+                autocomplete="off"
+                placeholder="3"
+                aria-describedby="erro-quantidade"
+              />
+              <p id="erro-quantidade"></p>
+            </div>
+          </div>
+
+          <div class="acoes-formulario">
+            <button id="botao-salvar" type="submit">Cadastrar</button>
+            <button id="botao-cancelar" type="button" hidden>Cancelar</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <p id="mensagem" role="status"></p>
+
+    <template id="modelo-produto">
+      <li class="produto">
+        <h3 class="produto-nome"></h3>
+        <p class="produto-preco"></p>
+        <p class="produto-estoque"></p>
+        <div class="produto-acoes">
+          <button type="button" data-acao="editar">Editar</button>
+          <button type="button" data-acao="excluir">Excluir</button>
+        </div>
+      </li>
+    </template>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
